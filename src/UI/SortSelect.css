@@ -1,0 +1,16 @@
+.search-and-sort-container {
+    display: flex;
+    justify-content: space-between; /* Равномерное распределение элементов по горизонтали */
+    align-items: center; /* Выравнивание по центру по вертикали */
+    padding: 10px 0;
+  }
+  
+  .search-bar {
+    flex: 1; /* Поле поиска занимает всё доступное пространство */
+    margin-right: 10px; /* Отступ между полем поиска и сортировкой */
+  }
+  
+  .sort-select {
+    flex-shrink: 0;
+    color: black; /* Элемент сортировки не сжимается */
+  }

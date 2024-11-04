@@ -1,42 +1,45 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import axios, { AxiosError } from 'axios'; // Импортируем AxiosError для типизации
+import axios, { AxiosError } from 'axios'; 
 
-interface Book {
+export interface Book {
+  id: number;
   key: string;
   title: string;
+  year: number;
+  publisher: string;
   author_name?: string[];
   subject?: string[];
   cover_i?: number;
 }
 
-interface BooksState {
+export interface BooksState {
   books: Book[];
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
+  sortBy: 'year' | 'title' | 'author';
 }
 
 const initialState: BooksState = {
   books: [],
   status: 'idle',
   error: null,
+  sortBy: 'year',
 };
 
-// Асинхронный Thunk с axios и типизированной ошибкой
+
 export const fetchBooks = createAsyncThunk(
   'books/fetchBooks',
   async (query: string, { rejectWithValue }) => {
     try {
       const response = await axios.get(`https://openlibrary.org/search.json?q=${query}`);
-      return response.data.docs; // Вернем массив книг
+      return response.data.docs;
     } catch (err) {
-      const error = err as AxiosError; // Преобразуем ошибку в AxiosError
+      const error = err as AxiosError;
 
-      // Обрабатываем ошибку, если есть ответ от сервера
       if (error.response) {
         return rejectWithValue(error.response.data);
       }
 
-      // Иначе бросаем общую ошибку
       throw new Error(error.message || 'Error fetching books');
     }
   }
@@ -45,7 +48,11 @@ export const fetchBooks = createAsyncThunk(
 const booksSlice = createSlice({
   name: 'books',
   initialState,
-  reducers: {},
+  reducers: {
+    setSortBy(state, action: PayloadAction<'year' | 'title' | 'author'>) {
+      state.sortBy = action.payload; 
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchBooks.pending, (state) => {
@@ -62,5 +69,7 @@ const booksSlice = createSlice({
       });
   },
 });
+
+export const { setSortBy } = booksSlice.actions;
 
 export default booksSlice.reducer;

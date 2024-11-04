@@ -4,12 +4,12 @@ import { AppDispatch } from '../store';
 import { fetchBooks } from '../store/bookSlice';
 
 const BookSearch: React.FC = () => {
-  const [query, setQuery] = useState(''); // Состояние для запроса
-  const dispatch = useDispatch<AppDispatch>(); // Диспетчер Redux
+  const [query, setQuery] = useState('');
+  const dispatch = useDispatch<AppDispatch>(); 
 
   const handleSearch = () => {
     if (query.trim()) {
-      dispatch(fetchBooks(query)); // Запуск запроса
+      dispatch(fetchBooks(query)); 
     }
   };
 

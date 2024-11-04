@@ -1,9 +1,18 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
+import { selectSortedBooks } from '../store/bookSelectors';
+import SearchAndSortContainer from './SearchAndSortContainer';
+import { useNavigate } from 'react-router-dom';
+import ComboBox from './ComboBox';
+
+
 
 const BookList: React.FC = () => {
-  const { books, status, error } = useSelector((state: RootState) => state.books);
+  const { status, error } = useSelector((state: RootState) => state.books);
+  const sortedBooks = useSelector(selectSortedBooks);
+  const navigate = useNavigate()
+
 
   if (status === 'loading') {
     return <p>Loading...</p>;
@@ -12,28 +21,34 @@ const BookList: React.FC = () => {
   if (status === 'failed') {
     return <p>Error: {error}</p>;
   }
+  const handleNavigate =(a)=>{
+    navigate(`/book/${a}`) 
+  }
 
   return (
-    <div>
-      <h2>Books:</h2>
-      {books.length > 0 ? (
-        <ul>
-          {books.map((book) => (
-            <li key={book.key} style={{ marginBottom: '10px' }}>
-              <h3>{book.title}</h3>
-              <p>{book.author_name?.join(', ') || 'Unknown Author'}</p>
+    <div className="books-container">
+
+      <SearchAndSortContainer />
+      <ComboBox/>
+      <h2 className="books-title">Books:</h2>
+      {sortedBooks.length > 0 ? (
+        <ul className="books-list">
+          {sortedBooks.map((book) => (
+            <li onClick={() => handleNavigate(book.cover_i)} key={book.key} className="book-card">
+              <h3 className="book-title">{book.title}</h3>
+              <p className="book-author">{book.author_name?.join(', ') || 'Unknown Author'}</p>
               {book.cover_i && (
                 <img
                   src={`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`}
                   alt={book.title}
-                  style={{ width: '100px', height: '150px' }}
+                  className="book-image"
                 />
               )}
             </li>
           ))}
         </ul>
       ) : (
-        <p>No books found.</p>
+        <p className="no-books">No books found.</p>
       )}
     </div>
   );

@@ -1,14 +1,17 @@
 import React from 'react';
-import BookSearch from './components/BookSearch';
+import  '../src/App.css'
 import BookList from './components/BookList';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BookDetails } from './components/BookDetails';
 
 const App: React.FC = () => {
   return (
-    <div style={{ padding: '20px' }}>
-      <h1>Book Search App</h1>
-      <BookSearch />
-      <BookList />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<BookList />} />
+        <Route path="/book/:id" element={<BookDetails />} /> 
+      </Routes>
+    </Router>
   );
 };
 
