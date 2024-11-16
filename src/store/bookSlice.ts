@@ -8,8 +8,16 @@ export interface Book {
   year: number;
   publisher: string;
   author_name?: string[];
+  author: string;
   subject?: string[];
   cover_i?: number;
+  description: string;
+}
+
+export interface AddBookDialogProps {
+  open: boolean;
+  onClose: () => void;
+  onAddBook: (book: Book) => void; // обязательный пропс
 }
 
 export interface BooksState {
@@ -25,6 +33,8 @@ const initialState: BooksState = {
   error: null,
   sortBy: 'year',
 };
+
+
 
 
 export const fetchBooks = createAsyncThunk(

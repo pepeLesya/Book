@@ -1,0 +1,95 @@
+/* Основной контейнер для поиска и сортировки */
+.search-and-sort-container {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);  /* Центрирование по горизонтали */
+  width: 100%;                
+  max-width: 800px;             /* Ограничение максимальной ширины */
+  z-index: 1000;
+  padding: 15px 20px;           /* Увеличим внутренний отступ для удобства */
+  display: flex;
+  align-items: center;
+  gap: 15px;                    /* Отступы между элементами */
+  justify-content: center;
+  background-color: #242424;    /* Цветовая палитра хедера */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  color: rgba(255, 255, 255, 0.87); /* Текст светлого цвета */
+}
+
+/* Стили для поля поиска */
+.search-and-sort-container .book-search { 
+  max-width: 400px;             /* Ограничиваем максимальную ширину */
+  flex-grow: 1;                 /* Чтобы занимало больше пространства */
+}
+
+/* Стили для выбора сортировки */
+.search-and-sort-container .sort-select {
+  width: 150px;                 /* Фиксированная ширина */
+  background-color: #333;       /* Цвет фона для соответствия стилю */
+  color: rgba(255, 255, 255, 0.87); /* Светлый цвет текста */
+}
+
+/* Стили для компонента сортировки */
+.sorted select {
+  padding: 10px;
+  font-size: 1em;
+  border-radius: 5px;
+  border: 1px solid #555;      /* Более темный цвет для границы */
+  background-color: #333;
+  color: rgba(255, 255, 255, 0.87); /* Светлый цвет текста */
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.sorted select:hover {
+  border-color: #888;           /* Светлая граница при наведении */
+}
+
+/* Стили для сообщения об отсутствии книг */
+.no-books {
+  font-size: 1.1em;
+  color: #ddd;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Общий контейнер для поиска и сортировки */
+.search-sort-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;                    /* Отступ между элементами */
+  justify-content: center;
+}
+
+/* Стили для компонента поиска */
+.book-search {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.book-search input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #555;
+  border-radius: 5px 0 0 5px;
+  background-color: #333;
+  color: rgba(255, 255, 255, 0.87);
+}
+
+.book-search button {
+  padding: 10px 15px;
+  font-size: 1em;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  background-color: #888;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.book-search button:hover {
+  background-color: #555;
+}

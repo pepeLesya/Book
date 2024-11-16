@@ -1,16 +1,24 @@
 import React from 'react';
 import SortSelect from './SortSelect';
 import BookSearch from './BookSearch';
-import '../UI/SortSelect.css'
-import ComboBox from './ComboBox';
+import './SortSelect.css'
+import MenuAdd from '../AddBook/MenuAdd';
+
+
 
 const SearchAndSortContainer: React.FC = () => {
     return (
       <div className="search-and-sort-container">
-        <BookSearch/>
-        <SortSelect />
-        <ComboBox/>
+      <div className="book-search">
+        <BookSearch />
       </div>
+      <div className="sort-select">
+        <SortSelect />
+      </div>
+      <div>
+        <MenuAdd/>
+      </div>
+    </div>
     );
   };
   
